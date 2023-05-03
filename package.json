@@ -2,7 +2,7 @@
   "name": "challange",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "main.js",
   "type": "module",
   "scripts": {
     "test": "jest --watchAll",
