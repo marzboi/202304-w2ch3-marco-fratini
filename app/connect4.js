@@ -17,29 +17,31 @@ const generateGamingBoard = (rows, columns) => {
 };
 
 const generateBoardLogic = (rows, columns) => {
-  let boardLogic = [];
+  const boardLogic = [];
   for (let row = 1; row <= rows; row++) {
-    let rowLocation = [];
+    const rowLocation = [];
     for (let column = 1; column <= columns; column++) {
-      let col = {};
+      const col = {};
       col.matched = false;
       col.player = "";
       col.rowLocation = row;
       col.colLocation = column;
       rowLocation.push(col);
     }
+
     boardLogic.push(rowLocation);
   }
+
   return boardLogic;
 };
 
 const placeTokenOnBoard = (row, column, currentBoard, playerOne, playerTwo) => {
-  let columnToPlaceToken = findSelectedInColumn(currentBoard, column);
+  const columnToPlaceToken = findSelectedInColumn(currentBoard, column);
 
   for (let col = columnToPlaceToken.length - 1; col >= 0; col--) {
     if (columnToPlaceToken[col].matched === false) {
       columnToPlaceToken[col].matched = true;
-      let tokenToPlace = document.querySelector(
+      const tokenToPlace = document.querySelector(
         `.row-${columnToPlaceToken[col].rowLocation}-col-${columnToPlaceToken[col].colLocation}`
       );
       if (playerOne === true) {
@@ -48,6 +50,7 @@ const placeTokenOnBoard = (row, column, currentBoard, playerOne, playerTwo) => {
         playerTwo = true;
         return;
       }
+
       if (playerTwo === true) {
         tokenToPlace.classList.add("yellow-player");
         playerTwo = false;
@@ -59,31 +62,32 @@ const placeTokenOnBoard = (row, column, currentBoard, playerOne, playerTwo) => {
 };
 
 const findSelectedInColumn = (currentBoard, column) => {
-  let selectedColumn = [];
+  const selectedColumn = [];
 
   for (let row = 0; row < currentBoard.length; row++) {
-    let rowArray = currentBoard[row];
+    const rowArray = currentBoard[row];
 
     for (let col = 0; col < rowArray.length; col++) {
-      let columnCoordinate = rowArray[col];
+      const columnCoordinate = rowArray[col];
 
       if (columnCoordinate.colLocation === column) {
         selectedColumn.push(columnCoordinate);
       }
     }
   }
+
   return selectedColumn;
 };
 
 const registerEventListeners = (currentBoard) => {
-  let tokens = document.querySelectorAll(".token-button");
+  const tokens = document.querySelectorAll(".token-button");
   let playerOne = true;
   let playerTwo = false;
 
   tokens.forEach((token) => {
     token.addEventListener("click", () => {
-      let row = parseInt(token.id);
-      let column = parseInt(token.value);
+      const row = parseInt(token.id);
+      const column = parseInt(token.value);
       placeTokenOnBoard(row, column, currentBoard, playerOne, playerTwo);
       [playerOne, playerTwo] = [playerTwo, playerOne];
     });
@@ -91,9 +95,9 @@ const registerEventListeners = (currentBoard) => {
 };
 
 const startGame = () => {
-  let rows = 6;
-  let columns = 7;
-  let currentBoard = generateBoardLogic(rows, columns);
+  const rows = 6;
+  const columns = 7;
+  const currentBoard = generateBoardLogic(rows, columns);
   generateGamingBoard(rows, columns);
   registerEventListeners(currentBoard);
 };
