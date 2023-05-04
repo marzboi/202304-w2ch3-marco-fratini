@@ -102,8 +102,6 @@ const startGame = () => {
   registerEventListeners(currentBoard);
 };
 
-const sum = (a, b) => a + b;
-
 export default {
   generateGamingBoard,
   generateBoardLogic,
@@ -111,5 +109,4 @@ export default {
   findSelectedInColumn,
   registerEventListeners,
   startGame,
-  sum,
 };
